@@ -1,0 +1,397 @@
+/* ============================================================
+   GANTT LASUITE.COOP
+   #271B79 · #B9FFB7 · #16B7C7 · #FBFFFA · Police Barlow
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&display=swap');
+
+:root {
+  --ls-violet: #271B79;
+  --ls-violet-dark: #1A1154;
+  --ls-violet-soft: #EAE8F5;
+  --ls-vert: #B9FFB7;
+  --ls-canard: #16B7C7;
+  --ls-canard-dark: #0E8A97;
+  --ls-fond: #FBFFFA;
+  --ls-white: #FFFFFF;
+  --ls-gray-100: #F4F4F2;
+  --ls-gray-200: #E2E2DE;
+  --ls-gray-500: #6E6A7C;
+  --ls-danger: #E03131;
+  --ls-radius-sm: 6px;
+  --ls-radius-md: 8px;
+  --ls-shadow: 0 8px 24px rgba(39,27,121,0.09);
+  --ls-font: 'Barlow', system-ui, -apple-system, sans-serif;
+  --label-width: minmax(280px, 360px);
+  --unit-width: 78px;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--ls-fond);
+  color: var(--ls-violet);
+  font-family: var(--ls-font);
+  font-size: 15px;
+}
+
+button, select, input {
+  font: inherit;
+}
+
+#ls-board {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--ls-fond);
+}
+
+.ls-app-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 18px 10px;
+  background: var(--ls-white);
+  border-bottom: 1px solid var(--ls-gray-200);
+}
+
+.ls-brand-mark {
+  width: 38px;
+  height: 38px;
+  display: grid;
+  place-items: center;
+  border: 2px solid var(--ls-violet);
+  border-radius: 8px;
+  background: var(--ls-vert);
+  color: var(--ls-violet);
+  font-weight: 700;
+  transform: rotate(-6deg);
+}
+
+.ls-app-title {
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+.ls-app-subtitle {
+  color: var(--ls-canard-dark);
+  font-size: 13px;
+  font-weight: 500;
+  margin-top: 2px;
+}
+
+.ls-toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: end;
+  gap: 8px;
+  padding: 10px 16px;
+  background: var(--ls-white);
+  border-bottom: 1px solid var(--ls-gray-200);
+}
+
+.ls-select-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 150px;
+}
+
+.ls-select-wrap > span {
+  color: var(--ls-gray-500);
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.ls-toolbar-select {
+  min-height: 34px;
+  padding: 6px 10px;
+  border: 1px solid var(--ls-gray-200);
+  border-radius: var(--ls-radius-md);
+  background: var(--ls-white);
+  color: var(--ls-violet);
+  cursor: pointer;
+}
+
+.ls-toolbar-select:focus {
+  outline: none;
+  border-color: var(--ls-canard);
+  box-shadow: 0 0 0 2px rgba(22,183,199,.15);
+}
+
+.ls-toolbar-btn {
+  min-height: 34px;
+  padding: 6px 12px;
+  border: 1px solid var(--ls-gray-200);
+  border-radius: var(--ls-radius-md);
+  background: var(--ls-white);
+  color: var(--ls-violet);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.ls-toolbar-btn:hover,
+.ls-segmented button:hover {
+  border-color: var(--ls-violet);
+  background: var(--ls-violet-soft);
+}
+
+.ls-segmented {
+  display: inline-flex;
+  border: 1px solid var(--ls-gray-200);
+  border-radius: var(--ls-radius-md);
+  overflow: hidden;
+  align-self: end;
+  min-height: 34px;
+}
+
+.ls-segmented button {
+  border: 0;
+  border-right: 1px solid var(--ls-gray-200);
+  background: var(--ls-white);
+  color: var(--ls-violet);
+  padding: 6px 10px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.ls-segmented button:last-child { border-right: 0; }
+.ls-segmented button.active {
+  background: var(--ls-violet);
+  color: var(--ls-white);
+}
+
+.ls-panel {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: end;
+  gap: 12px;
+  padding: 12px;
+  margin-top: 4px;
+  border: 1px solid var(--ls-gray-200);
+  border-radius: var(--ls-radius-md);
+  background: #FFFFFF;
+}
+
+.ls-panel-grid {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+  gap: 4px 14px;
+}
+
+.ls-check-row {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 30px;
+  color: var(--ls-violet);
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.ls-check-row input {
+  width: 16px;
+  height: 16px;
+  accent-color: var(--ls-violet);
+}
+
+.ls-gantt-wrap {
+  flex: 1;
+  overflow: auto;
+  padding: 16px;
+}
+
+.ls-gantt-grid {
+  display: grid;
+  grid-auto-rows: minmax(58px, auto);
+  min-width: max-content;
+  background: var(--ls-white);
+  border: 1px solid var(--ls-gray-200);
+  border-radius: var(--ls-radius-md);
+  box-shadow: var(--ls-shadow);
+  overflow: clip;
+}
+
+.ls-gantt-corner,
+.ls-gantt-head {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  min-height: 42px;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid var(--ls-gray-200);
+  background: var(--ls-white);
+  color: var(--ls-gray-500);
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.ls-gantt-corner {
+  left: 0;
+  z-index: 8;
+  padding: 0 14px;
+  color: var(--ls-violet);
+}
+
+.ls-gantt-head {
+  justify-content: center;
+  border-left: 1px solid var(--ls-gray-100);
+}
+
+.ls-task-label {
+  position: sticky;
+  left: 0;
+  z-index: 4;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 3px;
+  padding: 10px 14px;
+  border: 0;
+  border-bottom: 1px solid var(--ls-gray-100);
+  background: var(--ls-white);
+  color: var(--ls-violet);
+  text-align: left;
+  cursor: pointer;
+}
+
+.ls-task-label:hover {
+  background: var(--ls-violet-soft);
+}
+
+.ls-task-title {
+  max-width: 320px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.ls-task-meta {
+  color: var(--ls-canard-dark);
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.ls-task-extra {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px 8px;
+  margin-top: 3px;
+}
+
+.ls-task-extra .ls-card-field {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  max-width: 260px;
+  color: var(--ls-gray-500);
+  font-size: 12px;
+}
+
+.ls-task-extra .ls-card-field-label {
+  color: var(--ls-violet);
+  font-weight: 700;
+}
+
+.ls-gantt-cell {
+  min-height: 58px;
+  border-left: 1px solid var(--ls-gray-100);
+  border-bottom: 1px solid var(--ls-gray-100);
+  background:
+    linear-gradient(to bottom, rgba(22,183,199,0.04), rgba(22,183,199,0.04));
+}
+
+.ls-gantt-bar {
+  z-index: 3;
+  align-self: center;
+  height: 30px;
+  margin: 0 7px;
+  border: 0;
+  border-radius: var(--ls-radius-sm);
+  color: var(--ls-white);
+  font-weight: 700;
+  text-align: left;
+  cursor: pointer;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 5px 14px rgba(39,27,121,.18);
+}
+
+.ls-gantt-bar:hover {
+  filter: saturate(1.08) brightness(.98);
+  transform: translateY(-1px);
+}
+
+.ls-gantt-bar-text {
+  position: relative;
+  z-index: 2;
+  display: block;
+  padding: 6px 10px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ls-gantt-progress {
+  position: absolute;
+  inset: 0 auto 0 0;
+  z-index: 1;
+  display: block;
+  background: rgba(255,255,255,.24);
+}
+
+.ls-badge {
+  display: inline-flex;
+  align-items: center;
+  max-width: 150px;
+  overflow: hidden;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: var(--ls-violet-soft);
+  color: var(--ls-violet);
+  font-size: 12px;
+  font-weight: 600;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ls-badge-ref {
+  background: #E0F7FA;
+  color: var(--ls-canard-dark);
+}
+
+.ls-empty {
+  margin: 18px;
+  padding: 28px;
+  border: 1px dashed var(--ls-gray-200);
+  border-radius: var(--ls-radius-md);
+  background: var(--ls-white);
+  color: var(--ls-gray-500);
+  text-align: center;
+  font-weight: 600;
+}
+
+.ls-gantt-wrap::-webkit-scrollbar { width: 8px; height: 8px; }
+.ls-gantt-wrap::-webkit-scrollbar-track { background: transparent; }
+.ls-gantt-wrap::-webkit-scrollbar-thumb { background: var(--ls-gray-200); border-radius: 8px; }
+
+@media (max-width: 720px) {
+  :root { --label-width: minmax(230px, 270px); }
+  .ls-toolbar { align-items: stretch; }
+  .ls-select-wrap { min-width: 100%; }
+  .ls-segmented, .ls-toolbar-btn { width: 100%; }
+  .ls-segmented button { flex: 1; }
+  .ls-gantt-wrap { padding: 10px; }
+}
