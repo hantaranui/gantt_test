@@ -14,8 +14,10 @@ Chaque ligne de la table devient une barre temporelle. Le widget lit les colonne
 | Couleurs par statut | Utilise les couleurs d'une colonne Choice Grist |
 | Échelles | Jour, semaine ou mois |
 | Avancement | Affiche une progression si une colonne numérique existe |
-| Assigné | Affiche la personne ou le champ responsable dans la ligne |
-| Champs visibles | Choisissez les informations affichées sous chaque tâche |
+| Produit | Affiche le produit dans la ligne de gauche |
+| Assigné | Affiche la personne responsable avec ses initiales, comme dans le Kanban |
+| Détails repliables | Cliquez sur le titre pour ouvrir les autres champs de la ligne |
+| Champs visibles | Choisissez les informations affichées dans le détail |
 | Sélection Grist | Cliquez sur une ligne ou une barre pour sélectionner l'enregistrement dans Grist |
 
 ## Colonnes recommandées dans Grist
@@ -30,6 +32,8 @@ Chaque ligne de la table devient une barre temporelle. Le widget lit les colonne
 | `Responsable`, `Assigné` ou `Testeur` | Texte, Ref ou Choice | Optionnel | Information affichée sous le titre |
 
 Le widget essaie de deviner automatiquement ces colonnes avec leurs noms. Vous pouvez tout changer ensuite dans la barre d'outils.
+
+Par défaut, l'affichage reste compact : titre, produit, assigné et dates. Les autres colonnes apparaissent seulement quand vous cliquez sur le titre d'une ligne.
 
 ## Installer dans Grist
 
